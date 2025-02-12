@@ -33,7 +33,7 @@ int prescaler_bits(int n) {
   return _BV(CS10);
 }
 
-void initialize_pwm(int prescaler, unsigned short comp_reg_a, unsigned short comp_reg_b) {
+void initialize_pwm(int prescaler, uint16_t comp_reg_a, uint16_t comp_reg_b) {
   // enable timer1 control pins
   DDRB = _BV(PCINT1) | _BV(PCINT2);  
   TCCR1A = 0;
@@ -49,7 +49,7 @@ void initialize_pwm(int prescaler, unsigned short comp_reg_a, unsigned short com
 
 void set_pwm_frequency(unsigned int frequency) {
   // Optimize PWM resolution
-  unsigned short top = 0;
+  uint16_t top = 0;
   int prescale = 1;
   for (auto n : prescalers) {
     float test = (float)clock_frequency / (float)((float)frequency * (float)n) - (float)1;
